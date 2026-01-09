@@ -1,28 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faTrashCan, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { capitalize } from '../../../utils/stringUtils'
-
-interface WorkflowItem {
-  type: string
-  name: string
-  tags: { name: string; color: string }[]
-  lastUpdated: number
-  id: number
-}
+import { WorkflowItem, ModalContent } from '../../../types/workflow'
 
 interface EditModalProps {
   isOpen: boolean
   onClose: () => void
   workflow: WorkflowItem | null
   onSave: (item: WorkflowItem) => void
-  content: 'menu' | 'tags'
+  content: ModalContent
 }
 
 const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: EditModalProps) => {
   const [type, setType] = useState('')
   const [name, setName] = useState('')
   const [tags, setTags] = useState<{ name: string; color: string }[]>([])
+  const firstTagInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (workflow) {
@@ -36,7 +30,7 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
       if (content === 'tags') {
         // If opening in tags mode, add a new tag if there are no tags
         const existingTags = workflow.tags && Array.isArray(workflow.tags) && workflow.tags.length > 0 ? [...workflow.tags] : []
-        setTags(existingTags.length > 0 ? existingTags : [{ name: 'New Tag', color: '#000000' }])
+        setTags(existingTags.length > 0 ? existingTags : [{ name: '', color: '#000000' }])
       } else {
         setTags(workflow.tags && Array.isArray(workflow.tags) && workflow.tags.length > 0 ? [...workflow.tags] : [])
       }
@@ -46,6 +40,22 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
       setTags([])
     }
   }, [workflow, content])
+
+  // Focus on first tag input when opening in tags mode
+  useEffect(() => {
+    if (isOpen && content === 'tags' && tags.length > 0) {
+      // Small delay to ensure the input is rendered
+      setTimeout(() => {
+        if (firstTagInputRef.current) {
+          firstTagInputRef.current.focus()
+          // Select the text if it's "New Tag"
+          if (firstTagInputRef.current.value === 'New Tag') {
+            firstTagInputRef.current.select()
+          }
+        }
+      }, 100)
+    }
+  }, [isOpen, content, tags.length])
 
   if (!isOpen) return null
 
@@ -89,46 +99,48 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
         >
           <FontAwesomeIcon icon={faXmark} className="w-4 h-4 text-gray-600" />
         </button>
-        <h2 className="text-xl font-semibold mb-4">{content === 'tags' ? 'Edit Tags' : (workflow ? 'Edit Workflow' : 'New Workflow')}</h2>
+        {content !== 'tags' && (
+          <h2 className="text-xl font-semibold mb-4">{workflow ? 'Edit Workflow' : 'New Workflow'}</h2>
+        )}
         <form onSubmit={handleSubmit}>
           {content === 'menu' && (
             <>
-              <div className="mb-4">
-                <label className="block font-semibold mb-2">Type</label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="type"
-                      value="Workflow"
-                      checked={type === 'Workflow'}
-                      onChange={(e) => setType(e.target.value)}
-                      className="w-4 h-4"
-                    />
-                    <span>Workflow</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="type"
-                      value="Agent"
-                      checked={type === 'Agent'}
-                      onChange={(e) => setType(e.target.value)}
-                      className="w-4 h-4"
-                    />
-                    <span>Agent</span>
-                  </label>
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block font-semibold mb-2">Name</label>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Type</label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                  type="radio"
+                  name="type"
+                  value="Workflow"
+                  checked={type === 'Workflow'}
+                  onChange={(e) => setType(e.target.value)}
+                  className="w-4 h-4"
                 />
-              </div>
+                <span>Workflow</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="type"
+                  value="Agent"
+                  checked={type === 'Agent'}
+                  onChange={(e) => setType(e.target.value)}
+                  className="w-4 h-4"
+                />
+                <span>Agent</span>
+              </label>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded"
+            />
+          </div>
             </>
           )}
           <div className="mb-4">
@@ -137,6 +149,7 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
               {tags.length > 0 && tags.map((tag, index) => (
                 <div key={index} className="flex gap-2 items-center">
                   <input
+                    ref={index === 0 ? firstTagInputRef : null}
                     type="text"
                     value={tag.name}
                     onChange={(e) => handleTagChange(index, 'name', e.target.value)}

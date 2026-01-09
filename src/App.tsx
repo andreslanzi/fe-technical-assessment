@@ -3,9 +3,11 @@ import Sidebar from './components/Layout/Sidebar'
 import TopBar from './components/Layout/TopBar'
 import WorkflowsTable from './components/WorkflowsTable'
 import { useAirOps } from './hooks/airops'
+import { useDebounce } from './hooks/useDebounce'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
+  const debouncedSearchQuery = useDebounce(searchQuery, 300)
   const [triggerNew, setTriggerNew] = useState(0)
   const { data, isLoading } = useAirOps()
 
@@ -23,7 +25,7 @@ function App() {
           onSearchChange={setSearchQuery}
         />
         <WorkflowsTable 
-          searchQuery={searchQuery} 
+          searchQuery={debouncedSearchQuery} 
           triggerNew={triggerNew}
           data={data}
           isLoading={isLoading}
