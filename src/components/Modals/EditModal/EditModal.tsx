@@ -48,8 +48,8 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
       setTimeout(() => {
         if (firstTagInputRef.current) {
           firstTagInputRef.current.focus()
-          // Select the text if it's "New Tag"
-          if (firstTagInputRef.current.value === 'New Tag') {
+          // Select the text if it's empty
+          if (firstTagInputRef.current.value === '') {
             firstTagInputRef.current.select()
           }
         }

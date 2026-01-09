@@ -2,14 +2,14 @@ import { useState } from 'react'
 import Sidebar from './components/Layout/Sidebar'
 import TopBar from './components/Layout/TopBar'
 import WorkflowsTable from './components/WorkflowsTable'
-import { useAirOps } from './hooks/airops'
+import { useAirOps } from './hooks/useAirOps'
 import { useDebounce } from './hooks/useDebounce'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 300)
   const [triggerNew, setTriggerNew] = useState(0)
-  const { data, isLoading } = useAirOps()
+  const { data, isLoading, error } = useAirOps()
 
   // Opens the new workflow modal
   const handleNewClick = () => {
@@ -29,6 +29,7 @@ function App() {
           triggerNew={triggerNew}
           data={data}
           isLoading={isLoading}
+          error={error}
         />
       </div>
     </div>

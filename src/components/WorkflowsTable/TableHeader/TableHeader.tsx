@@ -36,7 +36,7 @@ const TableHeader = ({
             />
           </div>
         </th>
-        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[9.23%] max-w-[107px]">
+        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[13%] max-w-[107px]">
           <div className="flex items-center gap-1">
             <span>Type</span>
             <FontAwesomeIcon 
@@ -46,7 +46,7 @@ const TableHeader = ({
             />
           </div>
         </th>
-        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[56.08%] max-w-[650px]">
+        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[35%] max-w-[650px]">
           <div className="flex items-center gap-1">
             <span>Name</span>
             <FontAwesomeIcon 
@@ -56,8 +56,8 @@ const TableHeader = ({
             />
           </div>
         </th>
-        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[15.53%] max-w-[180px]">Tags</th>
-        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[11.56%] max-w-[134px]">
+        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[20%] max-w-[180px]">Tags</th>
+        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[13%] max-w-[134px]">
           <div className="flex items-center gap-1">
             <span>Last Updated</span>
             <FontAwesomeIcon 
@@ -67,7 +67,7 @@ const TableHeader = ({
             />
           </div>
         </th>
-        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[7.59%] max-w-[88px]">Actions</th>
+        <th className="text-left py-[18px] px-[16px] font-inter font-semibold text-sm leading-5 text-[#09090B] w-[10%] max-w-[88px]">Actions</th>
       </tr>
     </thead>
   )

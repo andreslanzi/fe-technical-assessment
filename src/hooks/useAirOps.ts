@@ -19,39 +19,39 @@ export const useAirOps = () => {
       setError(null)
       
       try {
-  const userId = import.meta.env.VITE_USER_ID
-  const workspaceId = import.meta.env.VITE_WORKSPACE_ID
-  const hashedUserId = import.meta.env.VITE_HASHED_USER_ID
-  const appIdStr = import.meta.env.VITE_AIROPS_APP_ID
-  const appVersionStr = import.meta.env.VITE_AIROPS_APP_VERSION
-  const appId = appIdStr ? Number(appIdStr) : NaN
-  const appVersion = appVersionStr ? Number(appVersionStr) : NaN
+        const userId = import.meta.env.VITE_USER_ID
+        const workspaceId = import.meta.env.VITE_WORKSPACE_ID
+        const hashedUserId = import.meta.env.VITE_HASHED_USER_ID
+        const appIdStr = import.meta.env.VITE_AIROPS_APP_ID
+        const appVersionStr = import.meta.env.VITE_AIROPS_APP_VERSION
+        const appId = appIdStr ? Number(appIdStr) : NaN
+        const appVersion = appVersionStr ? Number(appVersionStr) : NaN
 
-  if (!userId || !workspaceId || !hashedUserId || !appIdStr || isNaN(appId)) {
+        if (!userId || !workspaceId || !hashedUserId || !appIdStr || isNaN(appId)) {
           throw new Error('Missing required AirOps environment variables')
-  }
+        }
 
-  const client = AirOps.identify({
-    userId,
-    workspaceId: Number(workspaceId),
-    hashedUserId
-  })
+        const client = AirOps.identify({
+          userId,
+          workspaceId: Number(workspaceId),
+          hashedUserId
+        })
 
-  const response = await client.apps.execute({
-    appId,
-    version: appVersion,
-    payload: {
-      inputs: {
+        const response = await client.apps.execute({
+          appId,
+          version: appVersion,
+          payload: {
+            inputs: {
               count: 12,
-      }
-    },
-    stream: true,
-    streamCallback: () => (null),
-    streamCompletedCallback: () => (null),
-  })
+            }
+          },
+          stream: true,
+          streamCallback: () => (null),
+          streamCompletedCallback: () => (null),
+        })
 
-  const result = await response.result()
-  
+        const result = await response.result()
+        
         const resultData = result.output && typeof result.output === 'object' && 'data' in result.output
           ? result.output.data
           : result.output
