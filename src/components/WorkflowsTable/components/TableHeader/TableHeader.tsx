@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { SortColumn, SortDirection } from '../../../types/workflow'
+import { SortColumn, SortDirection } from '../../../../types/workflow'
 
 interface TableHeaderProps {
   sortColumn: SortColumn

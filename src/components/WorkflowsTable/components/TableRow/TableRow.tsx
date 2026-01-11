@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import TagsBadge from '../../TagsBadge'
-import { WorkflowItem, ModalContent } from '../../../types/workflow'
-import { formatDateRelative } from '../../../utils/dateUtils'
+import TagsBadge from '../../../TagsBadge'
+import { WorkflowItem, ModalContent } from '../../../../types/workflow'
+import { formatDateRelative } from '../../../../utils/dateUtils'
 
 interface TableRowProps {
   row: WorkflowItem
