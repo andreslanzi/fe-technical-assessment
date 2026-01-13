@@ -26,7 +26,7 @@ const TagsBadge = ({ tags, onAddTagClick }: TagsBadgeProps) => {
         {tags.map((tag, index) => (
           <div
             key={index}
-            className="w-2 h-2 rounded-xs"
+            className="w-2 h-2 rounded-sm"
             style={{ backgroundColor: tag.color }}
           />
         ))}
