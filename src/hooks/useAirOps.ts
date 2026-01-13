@@ -17,13 +17,13 @@ export const useAirOps = () => {
     const fetchData = async () => {
       setIsLoading(true)
       setError(null)
-      
+
       try {
         const userId = import.meta.env.VITE_USER_ID
         const workspaceId = import.meta.env.VITE_WORKSPACE_ID
         const hashedUserId = import.meta.env.VITE_HASHED_USER_ID
-        const appIdStr = import.meta.env.VITE_AIROPS_APP_ID
-        const appVersionStr = import.meta.env.VITE_AIROPS_APP_VERSION
+        const appIdStr = import.meta.env.VITE_APP_ID
+        const appVersionStr = import.meta.env.VITE_APP_VERSION
         const appId = appIdStr ? Number(appIdStr) : NaN
         const appVersion = appVersionStr ? Number(appVersionStr) : NaN
 
@@ -51,13 +51,13 @@ export const useAirOps = () => {
         })
 
         const result = await response.result()
-        
+
         const resultData = result.output && typeof result.output === 'object' && 'data' in result.output
           ? result.output.data
           : result.output
 
         const workflowsArray = normalizeWorkflowArray(resultData)
-        
+
         setData(workflowsArray)
       } catch (err) {
         console.error('Error fetching workflows:', err)

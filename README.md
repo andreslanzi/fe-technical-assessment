@@ -56,3 +56,43 @@ Try to finish within 3 hours. ⏰
     - [API](https://docs.airops.com/workflow-execution/api)
 
 That's it! If you have any questions, just ask. Good luck! 🍀
+
+### Environment Variables Setup
+
+To connect to the AirOps API, you'll need to configure your environment variables. Follow these steps:
+
+1. **Create a `.env` file** in the root directory of the project:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Fill in your AirOps credentials** in the `.env` file:
+   - `VITE_USER_ID`: Your AirOps user ID
+   - `VITE_WORKSPACE_ID`: Your AirOps workspace ID
+   - `VITE_APP_ID`: Your AirOps app ID
+   - `VITE_APP_VERSION`: (Optional) Your app version. (will use the default version if not provided)
+
+3. **Add your AirOps API key** to the `.env` file:
+   - `VITE_API_KEY`: Your AirOps API key
+   - Note: `VITE_USER_ID` is already required in step 2 and will be used for generating the hash
+
+4. **Generate `VITE_HASHED_USER_ID`** (Required):
+   
+   > ⚠️ **Important**: The `VITE_HASHED_USER_ID` cannot be found in your AirOps dashboard. You **must** generate it manually.
+   
+   Run the provided script that reads from your `.env` file:
+   
+   ```bash
+   npm run generate-hash
+   ```
+   
+   The script will automatically read `VITE_API_KEY` and `VITE_USER_ID` from your `.env` file and display the generated hash. Copy the output and add it to your `.env` file as `VITE_HASHED_USER_ID`.
+
+5. **Get your other credentials** from your AirOps account dashboard or refer to the [AirOps documentation](https://docs.airops.com/getting-started/readme/building-your-first-workflow).
+
+6. **Restart your dev server** after creating or updating the `.env` file:
+   ```bash
+   npm run dev
+   ```
+
+> **Note**: The `.env` file is already included in `.gitignore` to keep your credentials secure. Never commit your `.env` file to version control!
