@@ -75,7 +75,7 @@ const TableRow = ({
           <div className="flex items-center gap-2">
             <button 
               onClick={() => onEdit(row, originalIndex)}
-              className="w-6 h-6 rounded-[6px] p-[6px] flex items-center justify-center bg-[#09090B0A] hover:bg-[#09090B14] transition-colors"
+              className="w-6 h-6 rounded-[6px] p-[6px] flex items-center justify-center bg-[#09090B0A] hover:bg-violet-200 active:opacity-60 transition-colors"
             >
               <FontAwesomeIcon icon={faPencil} className="w-[13px] h-[13px] text-black" />
             </button>
@@ -83,7 +83,7 @@ const TableRow = ({
               onClick={() => onDelete(row, originalIndex)}
               className="w-6 h-6 rounded-[6px] p-[6px] flex items-center justify-center bg-[#09090B0A] hover:bg-red-100 transition-colors"
             >
-              <FontAwesomeIcon icon={faTrashCan} className="w-[13px] h-[13px] text-black hover:text-red-600 transition-colors" />
+              <FontAwesomeIcon icon={faTrashCan} className="w-[13px] h-[13px] text-black" />
             </button>
           </div>
         )}

@@ -12,7 +12,7 @@ const TagsBadge = ({ tags, onAddTagClick }: TagsBadgeProps) => {
     return (
       <button
         onClick={onAddTagClick}
-        className="flex items-center gap-2 px-2 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-50 transition-colors font-inter text-[13px] leading-5 text-[#868686]"
+        className="flex items-center gap-2 px-2 py-1 text-sm border border-gray-300 rounded-full hover:bg-violet-200 active:opacity-60 transition-colors font-inter text-[13px] leading-5 text-[#868686]"
       >
         <FontAwesomeIcon icon={faPlus} className="w-3 h-3" />
         <span>Add Tag</span>

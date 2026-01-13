@@ -141,7 +141,7 @@ const WorkflowsTable = ({ searchQuery, triggerNew, data: fetchedData, isLoading,
   }
 
   return (
-    <div className="flex-1 overflow-auto flex flex-col">
+    <div className="flex-1 overflow-auto flex flex-col px-5">
       <table className="w-full table-fixed">
         <TableHeader
           sortColumn={sortColumn}

@@ -174,7 +174,7 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
               <button
                 type="button"
                 onClick={handleAddTag}
-                className="flex items-center gap-2 px-2 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                className="flex items-center gap-2 px-2 py-1 text-sm border border-gray-300 rounded hover:bg-violet-200 active:opacity-60 transition-colors"
               >
                 <span>Add Tag</span>
                 <FontAwesomeIcon icon={faPlus} className="w-3 h-3" />
@@ -191,7 +191,7 @@ const EditModal = ({ isOpen, onClose, workflow, onSave, content = 'menu' }: Edit
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 bg-violet-600 text-white rounded hover:bg-violet-700 transition-colors"
             >
               {workflow ? 'Save' : 'Create'}
             </button>
